@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+html,body,:root{
+    height:100%;
+}
+
+.homr{
+    background-image: url(../public/a.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+ 
+}
