@@ -17,7 +17,7 @@ actor {
     gender:Text;
     location:Text;
     description:Text;
-    status:Text;
+    image:Text;
     matchdescription:Text;
   };
 
@@ -27,7 +27,7 @@ actor {
 
   //define function to register user
 
-  public shared ({caller}) func create_user_profile(username:Text,email:Text,phonenumber:Text,gender:Text,location:Text,description:Text,status:Text,matchdescription:Text):async Result.Result<Text,Text>{
+  public shared ({caller}) func create_user_profile(username:Text,email:Text,phonenumber:Text,gender:Text,location:Text,description:Text,image:Text,matchdescription:Text):async Result.Result<Text,Text>{
 
     //check to make sure the surname is unique
 
@@ -44,7 +44,7 @@ actor {
           gender;
           location;
           description;
-          status;
+          image;
           matchdescription;
         };
 
@@ -81,7 +81,7 @@ actor {
 
     //update user profile
 
-    public shared ({caller}) func update_user_profile(username:Text,email:Text,phonenumber:Text,gender:Text,location:Text,description:Text,status:Text,matchdescription:Text):async Result.Result<Text,Text>{
+    public shared ({caller}) func update_user_profile(username:Text,email:Text,phonenumber:Text,gender:Text,location:Text,description:Text,image:Text,matchdescription:Text):async Result.Result<Text,Text>{
 
     //check to make sure the surname is unique
 
@@ -101,7 +101,7 @@ actor {
           gender;
           location;
           description;
-          status;
+          image;
           matchdescription;
         };
 

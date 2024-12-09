@@ -3,6 +3,7 @@ import NavBar from './components/navabar';
 //import { love_backend } from 'declarations/love_backend';
 import {Routes,BrowserRouter, Route} from "react-router-dom"
 import Home from './components/Home';
+import HomePage from './components/Loves';
 function App() {
   // const [greeting, setGreeting] = useState('');
 
@@ -21,6 +22,7 @@ function App() {
 
       <Routes>
         <Route path="/" element={<Home/>}/>
+        <Route path="/home" element={<HomePage/>}/>
       </Routes>
    </BrowserRouter>
   );

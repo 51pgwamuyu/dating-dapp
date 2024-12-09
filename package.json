@@ -14,5 +14,9 @@
   "type": "module",
   "workspaces": [
     "src/love_frontend"
-  ]
+  ],
+  "dependencies": {
+    "@dfinity/auth-client": "^2.1.3",
+    "@dfinity/utils": "^2.7.1"
+  }
 }
