@@ -18,7 +18,7 @@ const defaultOptions = {
     },
   },
   loginOptions: {
-    identityProvider:`http://be2us-64aaa-aaaaa-qaabq-cai.localhost:4943/`,
+    identityProvider:`http://bkyz2-fmaaa-aaaaa-qaaaq-cai.localhost:4943/`,
   },
 }
 

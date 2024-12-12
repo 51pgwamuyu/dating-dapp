@@ -24,7 +24,7 @@ actor {
   //define storage for the users
 
   let users=HashMap.HashMap<Text,User>(1,Text.equal,Text.hash);
-
+  let usersonprincipal=HashMap.HashMap<Principal,User>(2,Principal.equal,Principal.hash);
   //define function to register user
 
   public shared ({caller}) func create_user_profile(username:Text,email:Text,phonenumber:Text,gender:Text,location:Text,description:Text,image:Text,matchdescription:Text):async Result.Result<Text,Text>{
@@ -49,6 +49,7 @@ actor {
         };
 
         users.put(username,newuser);
+        usersonprincipal.put(caller,newuser);
         return #ok("profile created successfully");
       };
       case (?_user){
@@ -56,7 +57,19 @@ actor {
       }
     }
   };
+//check if user already is profiled
+public query func check_user(principalid:Text):async Text{
 
+  let principal=Principal.fromText(principalid);
+  switch(usersonprincipal.get(principal)){
+    case (null){
+      return "failed"
+    };
+    case (?found){
+      return found.username;
+    }
+  }
+};
 //get user
     public query func get_user(username:Text):async Result.Result<User,Text>{
   
@@ -110,6 +123,11 @@ actor {
       }
     }
   };
+//whoami
 
+public shared query ({caller}) func whoami():async Text{
+
+  return Principal.toText(caller);
+};
 
 }

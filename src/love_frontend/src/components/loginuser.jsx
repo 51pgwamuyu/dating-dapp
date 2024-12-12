@@ -7,7 +7,7 @@ const Login = () => {
   const { isAuthenticated, login, principal, logout } = useAuth();
   const router=useNavigate()
   const handlelogin=()=>{
-    router("/home")
+    router("/find")
   }
   return (
     <>
@@ -22,7 +22,7 @@ const Login = () => {
         </button>
       ) : (
         <button onClick={login} className="border bg-gray-400 p-2 rounded-md">
-          Login with internet idenity
+          Login 
         </button>
       )}
     </>
