@@ -8,6 +8,7 @@ import Home from "./components/Home";
 import HomePage from "./components/Loves";
 import Profile from "./components/Profile";
 import AboutUser from "./components/about";
+import UpdateProfile from "./components/update-profile";
 function App() {
   // const [greeting, setGreeting] = useState('');
 
@@ -29,6 +30,7 @@ function App() {
           <Route path="/find" element={<HomePage />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/aboutuser/:username" element={<AboutUser/>}/>
+          <Route path="/updateuser" element={<UpdateProfile/>}/>
         </Routes>
       </AuthProvider>
     </BrowserRouter>

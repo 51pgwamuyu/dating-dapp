@@ -2,22 +2,18 @@ import { useEffect, useState } from "react";
 import { useAuth } from "./auth";
 import { love_backend } from "declarations/love_backend";
 const UpdateProfile = () => {
-  const [data, setData] = useState("");
+  const [username, setUsername] = useState("");
+  const [message, setMessage] = useState("");
   const [email, setEmail] = useState("");
   const [phonenumber, setPhoneNumber] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("male");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
 
   const [matchdescription, setMatchDescription] = useState("");
 
   const { isAuthenticated, login, principal, logout } = useAuth();
-  useEffect(() => {
-    love_backend.check_user(principal).then((result) => {
-      console.log(result, "results");
-      setData(result);
-    });
-  }, []);
+
   const [image, setImage] = useState("");
   const handleimage = (e) => {
     console.log(e.target.files);
@@ -33,7 +29,7 @@ const UpdateProfile = () => {
 
     love_backend
       .update_user_profile(
-        data,
+        username,
         email,
         phonenumber,
         gender,
@@ -44,7 +40,7 @@ const UpdateProfile = () => {
       )
       .then((result) => {
         console.log(result, "user1");
-        alert("user profile created");
+        alert(result.ok);
       });
   };
   return (
@@ -53,6 +49,18 @@ const UpdateProfile = () => {
         <div className="border w-1/2 mx-auto p-4 rounded-md">
           <h1 className="text-center">Update Your Profile</h1>
           <form action="" onSubmit={handlesubmit}>
+            <div className="flex flex-col my-3">
+              <label htmlFor="">your username</label>
+              <input
+                type="text"
+                value={username}
+                min={10}
+                max={50}
+                required
+                className="border"
+                onChange={(e) => setUsername(e.target.value)}
+              />
+            </div>
             <div className="flex flex-col my-3">
               <label htmlFor="">your email</label>
               <input
@@ -91,14 +99,14 @@ const UpdateProfile = () => {
             </div>
             <div className="flex flex-col my-3">
               <label htmlFor="">select your gender</label>
-              <select required onChange={(e) => setGender(e.target.value)}>
+              <select required onChange={(e) => setGender(e.target.value)} value={gender}>
                 <option value="male">male</option>
                 <option value="female">female</option>
               </select>
             </div>
 
             <div className="flex flex-col mb-3">
-              <label htmlFor="">Description of article</label>
+              <label htmlFor="">Your Description</label>
               <textarea
                 type="text"
                 value={description}
@@ -111,11 +119,11 @@ const UpdateProfile = () => {
             </div>
 
             <div className="flex flex-col mb-3">
-              <label htmlFor="">Image cover of article</label>
+              <label htmlFor="">Image cover of yourself</label>
               <input type="file" required onChange={handleimage} />
             </div>
             <div className="flex flex-col mb-3">
-              <label htmlFor="">Description of article</label>
+              <label htmlFor="">Description of your match </label>
               <textarea
                 type="text"
                 value={matchdescription}

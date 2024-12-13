@@ -57,19 +57,7 @@ actor {
       }
     }
   };
-//check if user already is profiled
-public query func check_user(principalid:Text):async Text{
 
-  let principal=Principal.fromText(principalid);
-  switch(usersonprincipal.get(principal)){
-    case (null){
-      return "failed"
-    };
-    case (?found){
-      return found.username;
-    }
-  }
-};
 //get user
     public query func get_user(username:Text):async Result.Result<User,Text>{
   

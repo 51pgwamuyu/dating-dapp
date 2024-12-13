@@ -7,7 +7,7 @@ const CreateProfile = () => {
   const [username, setUsername] = useState("");
   const [email, setEmail] = useState("");
   const [phonenumber, setPhoneNumber] = useState("");
-  const [gender, setGender] = useState("");
+  const [gender, setGender] = useState("male");
   const [location, setLocation] = useState("");
   const [description, setDescription] = useState("");
 
@@ -17,7 +17,6 @@ const CreateProfile = () => {
   const [image, setImage] = useState("");
 
   //get user
-  
 
   const handleimage = (e) => {
     console.log(e.target.files);
@@ -30,17 +29,38 @@ const CreateProfile = () => {
 
   const handlesubmit = (e) => {
     e.preventDefault();
-  
-    love_backend.create_user_profile(username,email,phonenumber,gender,location, description, image,matchdescription).then((result) => {
-      console.log(result, "user1");
-      alert("user profile created");
-    });
+
+    love_backend
+      .create_user_profile(
+        username,
+        email,
+        phonenumber,
+        gender,
+        location,
+        description,
+        image,
+        matchdescription
+      )
+      .then((result) => {
+        console.log(result, "user1");
+        alert(result.ok);
+      });
   };
   return (
     <div className="">
       {isAuthenticated ? (
         <div className="border w-1/2 mx-auto p-4 rounded-md">
-          <h1 className="text-center">create profile</h1>
+          <div className="flex items-center justify-between">
+            <h1 className="text-center">create profile</h1>
+            <p className="font-bold">or already registered </p>
+
+            <button
+              className="bg-purple-400 p-2 rounded-md"
+              onClick={() => router(`/updateuser`)}
+            >
+              update your details
+            </button>
+          </div>
           <form action="" onSubmit={handlesubmit}>
             <div className="flex flex-col my-3">
               <label htmlFor="">your username</label>
@@ -92,14 +112,14 @@ const CreateProfile = () => {
             </div>
             <div className="flex flex-col my-3">
               <label htmlFor="">select your gender</label>
-              <select required onChange={(e) => setGender(e.target.value)}>
+              <select required onChange={(e) => setGender(e.target.value)} value={gender}>
                 <option value="male">male</option>
                 <option value="female">female</option>
               </select>
             </div>
 
             <div className="flex flex-col mb-3">
-              <label htmlFor="">Description of article</label>
+              <label htmlFor="">Description of Yoourself</label>
               <textarea
                 type="text"
                 value={description}
@@ -112,11 +132,11 @@ const CreateProfile = () => {
             </div>
 
             <div className="flex flex-col mb-3">
-              <label htmlFor="">Image cover of article</label>
+              <label htmlFor="">Image cover of yourself</label>
               <input type="file" required onChange={handleimage} />
             </div>
             <div className="flex flex-col mb-3">
-              <label htmlFor="">Description of article</label>
+              <label htmlFor="">Description of your match</label>
               <textarea
                 type="text"
                 value={matchdescription}
